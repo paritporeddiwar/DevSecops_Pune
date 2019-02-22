@@ -3,8 +3,8 @@ Feature: Check for cross site Scriptng (xss)vulnerability using archini agaist g
 Background:
 Given "archini" is installed
 And the following profile:
-| name     | Value |
-| Url      | http://172.17.0.2"8008/login |
+| name     | environment_variable_name |
+| Url      | TARGET_HOSTNAME |
 
 Scenario: Do a XSS check on the path
 
