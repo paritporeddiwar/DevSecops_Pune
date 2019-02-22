@@ -11,7 +11,7 @@ Scenario: Do a XSS check on the path
 when I launch an "archini" attack with:
 """
 
-arachni --checks-XSS  --output-verbose --scope-page-limit=1 http://172.17.0.2"8008/login
+arachni --checks-XSS_PATH  --output-verbose --scope-page-limit=1 http://172.17.0.2"8008/login
 """
 Then the output should contain "0 Issues Detected"
 
@@ -20,6 +20,6 @@ Scenario: Do a XSS check on the event
 when I launch an "archini" attack with:
 """
 
-arachni --checks-XSS  --output-verbose --scope-page-limit=1 http://172.17.0.2"8008/login
+arachni --checks-XSS_EVENT  --output-verbose --scope-page-limit=1 http://172.17.0.2"8008/login
 """
 Then the output should contain "0 Issues Detected"
