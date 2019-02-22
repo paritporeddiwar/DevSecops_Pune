@@ -1,0 +1,13 @@
+@slow
+Feature: Check for cross site Scriptng (xss)vulnerability using archini agaist grueyere
+Background:
+Given "archini" is installed
+
+Scenario: Do a full acesss
+
+when I launch an "archini" attack with:
+"""
+
+arachni --checks-XSS --scope-page-limit=1 http://172.17.0.2"8008/login
+"""
+Then the output should contain "0 Issues Detected"
