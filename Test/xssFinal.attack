@@ -1,0 +1,25 @@
+@reallyslow
+Feature: Check for cross site Scriptng (xss)vulnerability using archini agaist grueyere
+Background:
+Given "archini" is installed
+And the following profile:
+| name     | Value |
+| Url      | http://172.17.0.2"8008/login |
+
+Scenario: Do a XSS check on the path
+
+when I launch an "archini" attack with:
+"""
+
+arachni --checks-XSS  --output-verbose --scope-page-limit=1 http://172.17.0.2"8008/login
+"""
+Then the output should contain "0 Issues Detected"
+
+Scenario: Do a XSS check on the event
+
+when I launch an "archini" attack with:
+"""
+
+arachni --checks-XSS  --output-verbose --scope-page-limit=1 http://172.17.0.2"8008/login
+"""
+Then the output should contain "0 Issues Detected"
