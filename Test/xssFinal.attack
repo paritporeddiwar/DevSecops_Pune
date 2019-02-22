@@ -1,25 +1,21 @@
 @reallyslow
-Feature: Check for cross site Scriptng (xss)vulnerability using archini agaist grueyere
+Feature: Check for cross site scripting (XSS) vulnerability using arachni against gruyere
 Background:
-Given "archini" is installed
-And the following profile:
-| name     | environment_variable_name |
-| Url      | TARGET_HOSTNAME |
+  Given "arachni" is installed
+  And the following profile:
+  | name              | environment_variable_name         |
+  | url               | TARGET_HOSTNAME                   |
 
-Scenario: Do a XSS check on the path
-
-when I launch an "archini" attack with:
-"""
-
-arachni --checks-XSS_PATH  --output-verbose --scope-page-limit=1 http://172.17.0.2"8008/login
-"""
-Then the output should contain "0 Issues Detected"
-
-Scenario: Do a XSS check on the event
-
-when I launch an "archini" attack with:
-"""
-
-arachni --checks-XSS_EVENT  --output-verbose --scope-page-limit=1 http://172.17.0.2"8008/login
-"""
-Then the output should contain "0 Issues Detected"
+Scenario: Do a xss check on the path
+  When I launch an "arachni" attack with:
+  """
+  arachni --checks=xss_path --output-verbose --scope-page-limit=1 <url>
+  """
+  Then the output should contain "0 issues were detected"
+  
+Scenario: Do a xss check on the event
+  When I launch an "arachni" attack with:
+  """
+  arachni --checks=xss_event --output-verbose --scope-page-limit=1 <url>
+  """
+  Then the output should contain "0 issues were detected"
